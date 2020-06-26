@@ -51,5 +51,18 @@ RSpec.describe 'POST /api/comments', type: :request do
         expect(response_json['errors']).to eq ['You need to sign in or sign up before continuing.']
       end
     end
+
+    describe 'User cant post a comment without article_id parameter' do
+      before do
+        post '/api/comments', params: { body: 'Comment string', user_id: user.id },
+                              headers: headers
+      end
+      it 'returns a 400 response' do
+        expect(response).to have_http_status 400
+      end
+      it 'returns error message' do
+        expect(response_json['message']).to eq 'Cant do that'
+      end
+    end
   end
 end

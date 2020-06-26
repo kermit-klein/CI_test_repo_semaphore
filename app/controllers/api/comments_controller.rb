@@ -18,12 +18,15 @@ class Api::CommentsController < ApplicationController
 
   def create
     comment = Comment.create(comments_params)
+    raise StandardError unless params[:article_id]
 
     if comment.persisted?
       render json: { message: 'Success! Your comment is posted' }
     else
       render json: { message: 'Body cant be blank' }, status: 400
     end
+  rescue StandardError
+    render json: { message: 'Cant do that' }, status: 400
   end
 
   private
