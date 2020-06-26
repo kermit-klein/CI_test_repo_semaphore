@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Api::CommentsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
   def index
     article = Article.find(params[:article_id])
     raise StandardError unless article
@@ -17,7 +18,12 @@ class Api::CommentsController < ApplicationController
 
   def create
     comment = Comment.create(comments_params)
-    render json: { message: 'Success! Your comment is posted' }
+
+    if comment.persisted?
+      render json: { message: 'Success! Your comment is posted' }
+    else
+      render json: { message: 'Body cant be blank' }, status: 400
+    end
   end
 
   private
