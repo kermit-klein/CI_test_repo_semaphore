@@ -14,4 +14,15 @@ class Api::CommentsController < ApplicationController
   rescue StandardError
     render json: { message: "Article with id #{params[:article_id]} could not be found" }, status: 404
   end
+
+  def create
+    comment = Comment.create(comments_params)
+    render json: { message: 'Success! Your comment is posted' }
+  end
+
+  private
+
+  def comments_params
+    params.permit(:body, :user_id, :article_id)
+  end
 end
