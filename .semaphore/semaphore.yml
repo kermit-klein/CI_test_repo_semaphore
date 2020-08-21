@@ -19,6 +19,7 @@ blocks:
             - sem-version ruby 2.5.1
             - nvm install 13.7.0
             - nvm use 13.7.0
+            - bundle config build.nokogiri --use-system-libraries
             - bundle install
             - yarn
             - 'bundle exec rails db:setup --all db:migrate'
