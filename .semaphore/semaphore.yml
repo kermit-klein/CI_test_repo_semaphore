@@ -19,7 +19,7 @@ blocks:
             - sem-version ruby 2.5.1
             - nvm install 13.7.0
             - nvm use 13.7.0
-            - bundle install --path vendor/bundle
+            - bundle install
             - yarn
             - 'bundle exec rails db:setup --all db:migrate'
             - 'bundle exec rails db:test:prepare'
