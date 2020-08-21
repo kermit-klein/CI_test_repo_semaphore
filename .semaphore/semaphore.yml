@@ -16,6 +16,7 @@ blocks:
         - name: Test
           commands:
             - checkout
+            - cache restore
             - nvm install 13.7.0
             - nvm use 13.7.0
             - gem update --system
