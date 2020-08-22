@@ -16,9 +16,10 @@ blocks:
         - name: Test
           commands:
             - checkout
+            - sem-service start postgres 11
             - sem-version ruby 2.5.1
+            - cache restore
             - bundle install --path vendor/bundle
-            - yarn
-            - 'bundle exec rails db:setup --all db:migrate'
-            - 'bundle exec rails db:test:prepare'
-            - 'bundle exec rails ci:tests'
+            - cache store
+            - 'bundle exec rake db:setup'
+            - bundle exec rspec
