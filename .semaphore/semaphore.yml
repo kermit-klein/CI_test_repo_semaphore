@@ -18,8 +18,6 @@ blocks:
             - checkout
             - sem-service start postgres 11
             - sem-version ruby 2.5.1
-            - cache restore
-            - bundle install --path vendor/bundle
-            - cache store
-            - 'bundle exec rake db:setup'
-            - bundle exec rspec
+            - 'bundle install '
+            - 'bundle exec rails db:setup --all db:migrate'
+            - bundle exec rspec spec
